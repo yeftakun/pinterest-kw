@@ -1,0 +1,3 @@
+Buat direktori penyimpanan: 
+folder post_img --> Gambar yang diposting
+profile_img --> foto profil
