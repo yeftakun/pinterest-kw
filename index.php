@@ -22,7 +22,7 @@
  
 		<form action="cek_login.php" method="post">
 			<label>Username</label>
-			<input type="text" name="username" class="form_login" placeholder="Username .." required="required">
+			<input type="text" name="user_name" class="form_login" placeholder="Username .." required="required">
  
 			<label>Password</label>
 			<input type="password" name="password" class="form_login" placeholder="Password .." required="required">

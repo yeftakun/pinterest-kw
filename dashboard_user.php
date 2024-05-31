@@ -11,15 +11,24 @@
 	include 'koneksi.php';
 
 	// cek apakah yang mengakses halaman ini sudah login
-	if($_SESSION['level']!=="pegawai"){
+	if($_SESSION['level_id']!==2){ //level user
 		header("location:deniedpage.php");
 		exit();
 	}
 
 	?>
 	<h1>Halaman Pegawai</h1>
+	<?php
+	if ($_SESSION['level_id'] == 1) {
+		$ME_ARE = "Admin";
+	} elseif ($_SESSION['level_id'] == 2){
+		$ME_ARE = "User";
+	} else {
+		$ME_ARE = "Unknown Status";
+	}
+	?>
 
-	<p>Halo <b><?php echo $_SESSION['username']; ?></b> Anda telah login sebagai <b><?php echo $_SESSION['level']; ?></b>.</p>
+	<p>Halo <b><?php echo $_SESSION['user_name']; ?></b> Anda telah login sebagai <b><?php echo $ME_ARE ?></b>.</p>
 	<a href="logout.php">LOGOUT</a>
 
 	<br/>
