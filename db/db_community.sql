@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 07:50 AM
+-- Generation Time: May 31, 2024 at 11:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -102,16 +102,18 @@ CREATE TABLE `users` (
   `user_dob` date DEFAULT NULL,
   `user_profile_path` varchar(200) DEFAULT NULL,
   `user_bio` varchar(300) DEFAULT NULL,
-  `level_id` int(11) DEFAULT NULL
+  `level_id` int(11) DEFAULT NULL,
+  `password` varchar(20) NOT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_dob`, `user_profile_path`, `user_bio`, `level_id`) VALUES
-(1, 'admin', 'Mas Admin', '2004-05-30', 'example.jpg', 'Ini adalah akun dadmin, hehehe', 1),
-(2, 'yefta', 'Yefta Asyel', '2004-05-30', 'example.jpg', 'Ini adalah akun Yefta, hehehe', 2);
+INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_dob`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`) VALUES
+(1, 'admin', 'Mas Admin', '2004-05-30', 'example.jpg', 'Ini adalah akun dadmin, hehehe', 1, '123', 'Aktif'),
+(2, 'yefta', 'Yefta Asyel', '2004-05-30', 'example.jpg', 'Ini adalah akun Yefta, hehehe', 2, '123', 'Aktif');
 
 --
 -- Indexes for dumped tables
@@ -184,7 +186,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
