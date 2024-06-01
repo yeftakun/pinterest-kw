@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 01:15 PM
+-- Generation Time: Jun 01, 2024 at 10:43 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,7 +52,8 @@ CREATE TABLE `posts` (
   `post_img_path` varchar(200) DEFAULT NULL,
   `post_title` varchar(100) DEFAULT NULL,
   `post_description` varchar(300) DEFAULT NULL,
-  `post_link` varchar(300) DEFAULT NULL
+  `post_link` varchar(300) DEFAULT NULL,
+  `create_in` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -99,21 +100,23 @@ CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(8) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
-  `user_dob` date DEFAULT NULL,
   `user_profile_path` varchar(200) DEFAULT NULL,
   `user_bio` varchar(300) DEFAULT NULL,
   `level_id` int(11) DEFAULT NULL,
   `password` varchar(20) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `create_in` timestamp NOT NULL DEFAULT current_timestamp(),
+  `delete_in` timestamp NOT NULL DEFAULT (current_timestamp() + interval 30 minute)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_dob`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`) VALUES
-(1, 'admin', 'Mas Admin', '2004-05-30', 'example.jpg', 'Ini adalah akun dadmin, hehehe', 1, '123', 'Aktif'),
-(2, 'yefta', 'Yefta Asyel', '2004-05-30', 'example.jpg', 'Ini adalah akun Yefta, hehehe', 2, '123', 'Aktif');
+INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`, `create_in`, `delete_in`) VALUES
+(8, 'admin', 'Admin', 'default.png', 'Ini adalah akun dari admin', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27'),
+(9, 'yefta', 'Yefta', 'default.png', 'Ini akun Yefta', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27'),
+(27, 'yefta2', 'Yefta 2', 'Blue Archive.jpg', 'Miaw hehehe', 2, '123', 'Aktif', '2024-06-01 07:35:55', '2024-06-01 08:05:55');
 
 --
 -- Indexes for dumped tables
@@ -186,7 +189,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
@@ -217,6 +220,16 @@ ALTER TABLE `post_likes`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `level` (`level_id`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `hapus_data_nonaktif` ON SCHEDULE EVERY 1 MINUTE STARTS '2024-06-01 13:43:44' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM users WHERE status = 'Nonaktif' AND delete_in <= NOW();
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
