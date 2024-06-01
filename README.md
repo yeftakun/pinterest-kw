@@ -8,7 +8,7 @@
 
 - di file `daftar.php` input file gambar memang sengaja di *comment*. Jadikan saja file ini referensi untuk **update profile**
 - di `storage/profile` itu ada `default.png` jangan dihapus ^^
-- Referensi tata letak gambar [referensi 1](https://yeftakun.github.io/TIK2032-Project/page/blog.html), referensi 2.
+- Referensi tata letak gambar di beranda [referensi 1](https://yeftakun.github.io/TIK2032-Project/page/blog.html), referensi 2.
 
 ### Database:
 
