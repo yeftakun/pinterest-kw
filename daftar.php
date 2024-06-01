@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Simpan kode OTP ke database
             $insertOTPQuery = "INSERT INTO otp (user_name, otp_code) VALUES ('$userName', '$generatedCode')";
-            mysqli_query($koneksi, $insertOTPQuery);
+            // eksekusi setelah data user berhasil diinput
 
             // API Telegram untuk mengirim pesan
             $telegramAPI = "https://api.telegram.org/bot$token/sendMessage?parse_mode=markdown&chat_id=$teleChatID&text=Otp%20`$generatedCode`";
@@ -105,6 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $insertQuery = "INSERT INTO users (user_name, name, user_profile_path, user_bio, level_id, password, status, tele_chat_id) VALUES ('$userName', '$name', '$filePath', '$bio', 2, '$password', 'Nonaktif', '$teleChatID')";
                 // Jalankan query
                 if (empty($errorMsg) && mysqli_query($koneksi, $insertQuery)) {
+                    mysqli_query($koneksi, $insertOTPQuery); // insert OTP code
                     // Redirect ke halaman sukses dengan alert jika berhasil
                     header("Location: verif-otp.php?pesan=registered");
                     exit();
