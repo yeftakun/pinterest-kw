@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 04:52 PM
+-- Generation Time: Jun 02, 2024 at 12:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,7 +47,7 @@ INSERT INTO `level` (`level_id`, `level_name`) VALUES
 --
 
 CREATE TABLE `otp` (
-  `user_name` varchar(8) DEFAULT NULL,
+  `user_name` varchar(30) DEFAULT NULL,
   `otp_code` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -110,8 +110,8 @@ CREATE TABLE `tags` (
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `user_name` varchar(15) DEFAULT NULL,
-  `name` varchar(20) DEFAULT NULL,
+  `user_name` varchar(30) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
   `user_profile_path` varchar(200) DEFAULT NULL,
   `user_bio` varchar(300) DEFAULT NULL,
   `level_id` int(11) DEFAULT NULL,
@@ -145,7 +145,9 @@ ALTER TABLE `level`
 -- Indexes for table `otp`
 --
 ALTER TABLE `otp`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_name` (`user_name`),
+  ADD UNIQUE KEY `user_name_2` (`user_name`);
 
 --
 -- Indexes for table `posts`
@@ -182,6 +184,7 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `tele_chat_id` (`tele_chat_id`),
   ADD UNIQUE KEY `user_name_2` (`user_name`),
+  ADD UNIQUE KEY `user_name_3` (`user_name`),
   ADD KEY `idx_level_id` (`level_id`);
 
 --
@@ -198,7 +201,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `otp`
 --
 ALTER TABLE `otp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -216,11 +219,17 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `otp`
+--
+ALTER TABLE `otp`
+  ADD CONSTRAINT `fk_user_name` FOREIGN KEY (`user_name`) REFERENCES `users` (`user_name`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
