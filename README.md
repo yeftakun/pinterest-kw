@@ -19,7 +19,7 @@ Perubahan terbaru pada proyek:
 
 ### Database:
 
-#### 1. Event Hapus data yang belum di validasi saat 30 menit
+#### 1. Event Hapus data yang belum di validasi saat 3 menit
 
 Input gambar tidak dipakai karena ketika akun yang belum tervalidasi dihapus file gambar tertinggal di direktori `storage/profile/`.
 
