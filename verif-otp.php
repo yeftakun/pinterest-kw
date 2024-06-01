@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<div class='alert'>Mohon lengkapi semua field.</div>";
         }
         if($_GET['pesan']=="registered"){
-			echo "<div class='done'>Masukan kode OTP yang dikirim ke telegram</div>";
+			echo "<div class='done'>OTP terkirim di Telegram, berlaku 3 menit</div>";
 		}
     }
     ?>
