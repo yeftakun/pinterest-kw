@@ -19,35 +19,36 @@ $cek = mysqli_num_rows($login);
 if($cek > 0){
 
 	$data = mysqli_fetch_assoc($login);
-
-	// cek jika user login sebagai admin
-	if($data['level_id']==1){
-
-		// buat session login dan username
-		$_SESSION['user_name'] = $username;
-		$_SESSION['level_id'] = 1;
-		// alihkan ke halaman dashboard admin
-		header("location:dashboard_admin.php");
-
-	// cek jika user login sebagai user
-	}else if($data['level_id']==2){
-		// buat session login dan username
-		$_SESSION['user_name'] = $username;
-		$_SESSION['level_id'] = 2;
-		// alihkan ke halaman dashboard user
-		header("location:dashboard_user.php");
+	if($data['status'] == 'Nonaktif'){
+		header("location:index.php?pesan=unvalidated");
+		exit();
+	} else {
+		// cek jika user login sebagai admin
+		if($data['level_id']==1){
 	
-	}else{
-
-		// alihkan ke halaman login kembali
-		header("location:index.php?pesan=gagal");
+			// buat session login dan username
+			$_SESSION['user_name'] = $username;
+			$_SESSION['level_id'] = 1;
+			// alihkan ke halaman dashboard admin
+			header("location:pages/dashboard_admin.php");
+	
+		// cek jika user login sebagai user
+		}else if($data['level_id']==2){
+			// buat session login dan username
+			$_SESSION['user_name'] = $username;
+			$_SESSION['level_id'] = 2;
+			// alihkan ke halaman dashboard user
+			header("location:pages/dashboard_user.php");
+		
+		}else{
+	
+			// alihkan ke halaman login kembali
+			header("location:index.php?pesan=gagal");
+		}
 	}
 
 	
 }else{
 	header("location:index.php?pesan=gagal");
 }
-
-
-
 ?>
