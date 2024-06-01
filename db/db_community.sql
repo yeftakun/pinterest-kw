@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 10:43 AM
+-- Generation Time: Jun 01, 2024 at 04:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,6 +39,18 @@ CREATE TABLE `level` (
 INSERT INTO `level` (`level_id`, `level_name`) VALUES
 (1, 'Admin'),
 (2, 'User');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otp`
+--
+
+CREATE TABLE `otp` (
+  `user_name` varchar(8) DEFAULT NULL,
+  `otp_code` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -98,7 +110,7 @@ CREATE TABLE `tags` (
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
-  `user_name` varchar(8) DEFAULT NULL,
+  `user_name` varchar(15) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   `user_profile_path` varchar(200) DEFAULT NULL,
   `user_bio` varchar(300) DEFAULT NULL,
@@ -106,17 +118,18 @@ CREATE TABLE `users` (
   `password` varchar(20) NOT NULL,
   `status` varchar(10) NOT NULL,
   `create_in` timestamp NOT NULL DEFAULT current_timestamp(),
-  `delete_in` timestamp NOT NULL DEFAULT (current_timestamp() + interval 30 minute)
+  `delete_in` timestamp NOT NULL DEFAULT (current_timestamp() + interval 3 minute),
+  `tele_chat_id` varchar(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`, `create_in`, `delete_in`) VALUES
-(8, 'admin', 'Admin', 'default.png', 'Ini adalah akun dari admin', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27'),
-(9, 'yefta', 'Yefta', 'default.png', 'Ini akun Yefta', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27'),
-(27, 'yefta2', 'Yefta 2', 'Blue Archive.jpg', 'Miaw hehehe', 2, '123', 'Aktif', '2024-06-01 07:35:55', '2024-06-01 08:05:55');
+INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`, `create_in`, `delete_in`, `tele_chat_id`) VALUES
+(8, 'admin', 'Admin', 'default.png', 'Ini adalah akun dari admin', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27', NULL),
+(9, 'yefta', 'Yefta', 'default.png', 'Ini akun Yefta', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27', NULL),
+(27, 'yefta2', 'Yefta 2', 'Blue Archive.jpg', 'Miaw hehehe', 2, '123', 'Aktif', '2024-06-01 07:35:55', '2024-06-01 08:05:55', NULL);
 
 --
 -- Indexes for dumped tables
@@ -127,6 +140,12 @@ INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_profile_path`, `user_
 --
 ALTER TABLE `level`
   ADD PRIMARY KEY (`level_id`);
+
+--
+-- Indexes for table `otp`
+--
+ALTER TABLE `otp`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `posts`
@@ -161,6 +180,8 @@ ALTER TABLE `tags`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_name` (`user_name`),
+  ADD UNIQUE KEY `tele_chat_id` (`tele_chat_id`),
+  ADD UNIQUE KEY `user_name_2` (`user_name`),
   ADD KEY `idx_level_id` (`level_id`);
 
 --
@@ -172,6 +193,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `level`
   MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `otp`
+--
+ALTER TABLE `otp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -189,7 +216,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables
