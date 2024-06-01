@@ -5,12 +5,18 @@ include 'koneksi.php';
 // Pesan kesalahan
 $errorMsg = '';
 
+// Include file environment.php
+include 'environment.php';
+// Menggunakan nilai dari variabel TOKEN_BOT
+$token = TOKEN_BOT;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari form
     $userName = $_POST['user_name'];
     $name = $_POST['name'];
     $bio = $_POST['bio'];
     $password = $_POST['password'];
+    $teleChatID = $_POST['tele_chat_id'];
 
     // Inisialisasi direktori dan nama file default
     $uploadDir = 'storage/profile/';
@@ -25,62 +31,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($totalUsername > 0) {
         $errorMsg = "Username sudah digunakan. Silakan pilih username lain.";
     } else {
-        // Fungsi untuk mendapatkan ekstensi file
-        function getFileExtension($filename) {
-            return pathinfo($filename, PATHINFO_EXTENSION);
-        }
 
-        // Fungsi untuk mendapatkan nama file tanpa ekstensi
-        function getFileNameWithoutExtension($filename) {
-            return pathinfo($filename, PATHINFO_FILENAME);
-        }
+        // Cek apakah tele_chat_id sudah ada dalam database
+        $checkTeleChatIDQuery = "SELECT COUNT(tele_chat_id) AS total FROM users WHERE tele_chat_id = '$teleChatID'";
+        $checkTeleChatIDResult = mysqli_query($koneksi, $checkTeleChatIDQuery);
+        $rowTeleChatID = mysqli_fetch_assoc($checkTeleChatIDResult);
+        $totalTeleChatID = $rowTeleChatID['total'];
 
-        // Validasi ukuran file
-        if ($_FILES['image']['size'] > 0 && $_FILES['image']['size'] > 512 * 1024) {
-            header("location:daftar.php?pesan=filetoolarge");
-		    exit();
+        if ($totalTeleChatID > 0) {
+            header("location:daftar.php?pesan=chatidused");
+            exit();
         } else {
-            // Validasi ekstensi file
-            if ($_FILES['image']['size'] > 0) {
-                $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
-                $imageExtension = getFileExtension($_FILES['image']['name']);
-                if (!in_array($imageExtension, $allowedExtensions)) {
-                    header("location:daftar.php?pesan=unsupportedfile");
-                    exit();
-                }
+
+            // Generate kode OTP
+            $generatedCode = mt_rand(100000, 999999);
+
+            // Simpan kode OTP ke database
+            $insertOTPQuery = "INSERT INTO otp (user_name, otp_code) VALUES ('$userName', '$generatedCode')";
+            mysqli_query($koneksi, $insertOTPQuery);
+
+            // API Telegram untuk mengirim pesan
+            $telegramAPI = "https://api.telegram.org/bot$token/sendMessage?parse_mode=markdown&chat_id=$teleChatID&text=Otp%20`$generatedCode`";
+
+            // Kirim pesan ke Telegram
+            file_get_contents($telegramAPI);
+
+            // Fungsi untuk mendapatkan ekstensi file
+            function getFileExtension($filename) {
+                return pathinfo($filename, PATHINFO_EXTENSION);
             }
 
-            // Proses upload gambar jika ada
-            if (empty($errorMsg) && $_FILES['image']['size'] > 0) {
-                $fileName = $_FILES['image']['name'];
-                $filePath = $uploadDir . $fileName;
-                $i = 1;
-                while (file_exists($filePath)) {
-                    $newFileName = getFileNameWithoutExtension($fileName) . '-' . $i . '.' . $imageExtension;
-                    $filePath = $uploadDir . $newFileName;
-                    $i++;
-                }
-                if (!move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
-                    $errorMsg = "Gagal mengunggah file gambar.";
-                }
-                // Set $filePath hanya dengan nama file
-                $filePath = basename($filePath);
-            } else {
-                // Gunakan gambar default jika tidak ada gambar yang diunggah
-                $filePath = $defaultImage;
+            // Fungsi untuk mendapatkan nama file tanpa ekstensi
+            function getFileNameWithoutExtension($filename) {
+                return pathinfo($filename, PATHINFO_FILENAME);
             }
 
-            // Query untuk memasukkan data ke database
-            $insertQuery = "INSERT INTO users (user_name, name, user_profile_path, user_bio, level_id, password, status) VALUES ('$userName', '$name', '$filePath', '$bio', 2, '$password', 'Nonaktif')";
-            // Jalankan query
-            if (empty($errorMsg) && mysqli_query($koneksi, $insertQuery)) {
-                // Redirect ke halaman sukses dengan alert jika berhasil
-                header("Location: index.php?pesan=registered");
+            // Validasi ukuran file
+            if ($_FILES['image']['size'] > 0 && $_FILES['image']['size'] > 512 * 1024) {
+                header("location:daftar.php?pesan=filetoolarge");
                 exit();
-            } elseif (empty($errorMsg)) {
-                $errorMsg = "Gagal memasukkan data ke database: " . mysqli_error($koneksi);
+            } else {
+                // Validasi ekstensi file
+                if ($_FILES['image']['size'] > 0) {
+                    $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
+                    $imageExtension = getFileExtension($_FILES['image']['name']);
+                    if (!in_array($imageExtension, $allowedExtensions)) {
+                        header("location:daftar.php?pesan=unsupportedfile");
+                        exit();
+                    }
+                }
+
+                // Proses upload gambar jika ada
+                if (empty($errorMsg) && $_FILES['image']['size'] > 0) {
+                    $fileName = $_FILES['image']['name'];
+                    $filePath = $uploadDir . $fileName;
+                    $i = 1;
+                    while (file_exists($filePath)) {
+                        $newFileName = getFileNameWithoutExtension($fileName) . '-' . $i . '.' . $imageExtension;
+                        $filePath = $uploadDir . $newFileName;
+                        $i++;
+                    }
+                    if (!move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
+                        $errorMsg = "Gagal mengunggah file gambar.";
+                    }
+                    // Set $filePath hanya dengan nama file
+                    $filePath = basename($filePath);
+                } else {
+                    // Gunakan gambar default jika tidak ada gambar yang diunggah
+                    $filePath = $defaultImage;
+                }
+
+                // Query untuk memasukkan data ke database
+                $insertQuery = "INSERT INTO users (user_name, name, user_profile_path, user_bio, level_id, password, status, tele_chat_id) VALUES ('$userName', '$name', '$filePath', '$bio', 2, '$password', 'Nonaktif', '$teleChatID')";
+                // Jalankan query
+                if (empty($errorMsg) && mysqli_query($koneksi, $insertQuery)) {
+                    // Redirect ke halaman sukses dengan alert jika berhasil
+                    header("Location: verif-otp.php?pesan=registered");
+                    exit();
+                } elseif (empty($errorMsg)) {
+                    $errorMsg = "Gagal memasukkan data ke database: " . mysqli_error($koneksi);
+                }
             }
         }
+
     }
 }
 ?>
@@ -103,6 +136,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_GET['pesan'])){
         if($_GET['pesan']=="unsupportedfile"){
             echo "<div class='alert'>Format file tidak didukung. Hanya JPG, JPEG, PNG, dan GIF yang diperbolehkan.</div>";
+        }
+    }
+    if(isset($_GET['pesan'])){
+        if($_GET['pesan']=="chatidused"){
+            echo "<div class='alert'>ChatID Telegram sudah digunakan. Silakan gunakan ChatID yang lain.</div>";
         }
     }
     ?>
@@ -132,6 +170,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+
+            <label for="tele_chat_id">ChatID Telegram:</label>
+            <input type="text" id="tele_chat_id" name="tele_chat_id" required>
+            <p><a href="https://t.me/chatIDrobot">Dapatkan ChatID</a></p>
+            <p>Sebelum submit, lakukan init (tulis apapun) terlebih dahulu <a href="https://t.me/spamtestingbot">di sini</a></p>
+
 
             <button class="button" type="submit">Daftar</button>
         </form>

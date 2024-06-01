@@ -17,13 +17,13 @@
 		}
 	}
 	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="registered"){
-			echo "<div class='done'>Berhasil daftar, tunggu validasi admin</div>";
+		if($_GET['pesan']=="unvalidated"){
+			echo "<div class='alert'>Akun belum divalidasi oleh admin</div>";
 		}
 	}
 	if(isset($_GET['pesan'])){
-		if($_GET['pesan']=="unvalidated"){
-			echo "<div class='alert'>Akun belum divalidasi oleh admin</div>";
+		if($_GET['pesan']=="valsuccess"){
+			echo "<div class='done'>Akun anda telah diverifikasi, silahkan login</div>";
 		}
 	}
 	?>
@@ -43,7 +43,8 @@
 			<br/>
 			<br/>
 			<center>
-				<a class="link" href="daftar.php">Daftar</a>
+				<a class="link" href="daftar.php">Daftar</a><br><br>
+				<a class="link" href="verif-otp.php">Validasi</a>
 			</center>
 		</form>
 		
