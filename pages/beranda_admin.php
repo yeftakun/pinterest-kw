@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Halaman admin - www.malasngoding.com</title>
+	<title>Beranda - Admin</title>
 	<link rel="stylesheet" type="text/css" href="../styles/style.css">
 	<link rel="stylesheet" type="text/css" href="../styles/alert.css">
 	<link rel="icon" type="image/png" href="../assets/ico/HitoriGotou.ico">
 </head>
 <body>
 	<?php 
+	session_set_cookie_params(3600);
 	session_start();
 	include '../koneksi.php';
 
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['level_id']!==1){ //level admin
-		header("location:deniedpage.php");
+		header("location:error/deniedpage.php");
 		exit();
 	}
 
@@ -29,8 +30,20 @@
 		$ME_ARE = "Unknown Status";
 	}
 	?>
-
-	<p>Halo <b><?php echo $_SESSION['user_name']; ?></b> Anda telah login sebagai <b><?php echo $ME_ARE ?></b>.</p>
+	<p>Informasi Saya:</p>
+	<?php
+		echo '<img src="../storage/profile/' . $_SESSION['user_profile_path'] . '" alt="' . $_SESSION['user_profile_path'] . '" max-width="300px">';
+	?>
+	<ul>
+		<li>User ID : <?php echo $_SESSION['user_id']; ?></li>
+		<li>User ID : <?php echo $_SESSION['user_name']; ?></li>
+		<li>User ID : <?php echo $_SESSION['name']; ?></li>
+		<li>Bio : <?php echo $_SESSION['user_bio']; ?></li>
+		<li>Level ID : <?php echo $ME_ARE; ?></li>
+		<li>Password : <?php echo $_SESSION['password']; ?></li>
+		<li>Status : <?php echo $_SESSION['status']; ?></li>
+		<li>Chat ID : <?php echo $_SESSION['tele_chat_id']; ?></li>
+	</ul>
 	<a href="../logout.php">LOGOUT</a>
 
 	<br/>
