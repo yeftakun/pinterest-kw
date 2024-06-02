@@ -1,7 +1,6 @@
 <?php
 // Include koneksi ke database
 include '../koneksi.php';
-session_set_cookie_params(3600);
 session_start();
 
 // Ambil nama pengguna dari URL
