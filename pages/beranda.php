@@ -39,12 +39,13 @@ include '../koneksi.php';
                 </div>
                 <div class="home-search-bar">
                     <!-- Buat search bar -->
+                    <p><b>MK: Jadi search bar:v wkwkwk</b></p>
                 </div>
                 <div class="nav-to">
-                    Beranda
+                    <p><a href="beranda.php">Beranda</a></p>
                 </div>
                 <div class="nav-to">
-                    Posting
+                    <p><a href="admin_panel.php">Admin Panel</a></p>
                 </div>
                 <div class="profile-pic">
                     <a href="profile.php?user_name=<?php echo $_SESSION['user_name']; ?>">
@@ -82,12 +83,13 @@ include '../koneksi.php';
                 </div>
                 <div class="home-search-bar">
                     <!-- Buat search bar -->
+                    <p><b>MK: Jadi search bar:v wkwkwk</b></p>
                 </div>
                 <div class="nav-to">
-                    Beranda
+                    <p><a href="beranda.php">Beranda</a></p>
                 </div>
                 <div class="nav-to">
-                    Posting
+                    <p><a href="post.php">Posting</a></p>
                 </div>
                 <div class="profile-pic">
                     <a href="profile.php?user_name=<?php echo $_SESSION['user_name']; ?>">
@@ -126,12 +128,15 @@ include '../koneksi.php';
                 </div>
                 <div class="home-search-bar">
                     <!-- Buat search bar -->
+                    <p><b>MK: Jadi search bar:v wkwkwk</b></p>
                 </div>
                 <div class="nav-to">
-                    Beranda
+                    <p><a href="beranda.php">Beranda</a></p>
                 </div>
                 <div class="nav-to">
-                    <a href="../index.php">LOGIN</a>
+                    <p>
+                        <a href="../index.php">LOGIN</a>
+                    </p>
                 </div>
             </header>
             <p>Halaman ketika belum login</p>
