@@ -53,7 +53,7 @@ if(isset($_SESSION['level_id'])) {
 <?php
     } else {
         // jika bukan admin
-        // header("location:error/deniedpage.php");
+        header("location:error/deniedpage.php");
     }
 } else {
     // jika belum login
