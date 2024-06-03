@@ -234,5 +234,9 @@ $result = mysqli_query($koneksi, $query);
 
 	<br/>
 	<br/>
+
+    <script src="../script/preview-img.js"></script>
+    <script src="../script/alert-time.js"></script>
+
 </body>
 </html>
