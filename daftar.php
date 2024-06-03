@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // eksekusi setelah data user berhasil diinput
 
             // API Telegram untuk mengirim pesan
-            $telegramAPI = "https://api.telegram.org/bot$token/sendMessage?parse_mode=markdown&chat_id=$teleChatID&text=Otp%20`$generatedCode`";
+            $telegramAPI = "https://api.telegram.org/bot$token/sendMessage?parse_mode=markdown&chat_id=$teleChatID&text=Kode%20OTP%20Regis:%20`$generatedCode`";
 
             // Kirim pesan ke Telegram
             file_get_contents($telegramAPI);
