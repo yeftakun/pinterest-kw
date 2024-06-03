@@ -26,6 +26,11 @@
 			echo "<div class='done'>Akun anda telah diverifikasi, silahkan login</div>";
 		}
 	}
+	if(isset($_GET['pesan'])){
+		if($_GET['pesan']=="needlogin"){
+			echo "<div class='done'>Login terlebih dahulu</div>";
+		}
+	}
 	?>
  
 	<div class="kotak_login">
