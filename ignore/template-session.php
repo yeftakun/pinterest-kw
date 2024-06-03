@@ -22,4 +22,38 @@ if(isset($_SESSION['level_id'])) {
     // beranda belum login
 }
 
+if(isset($_SESSION['level_id'])) {
+    if($_SESSION['level_id'] == 1) {
+        // beranda admin
+    } else {
+        header("location:error/deniedpage.php");
+    }
+} else {
+    header("location:error/index.php?pesan=needlogin");
+}
+
+if(isset($_SESSION['level_id'])) {
+    if($_SESSION['level_id'] == 1) {
+        // beranda admin
+        if(isset($_GET['page'])) {
+            $page = $_GET['page'];
+            if($page == "level") {
+                // add data level
+            } elseif($page == "otp") {
+                // add data otp
+            } elseif($page == "posts") {
+                // add data posts
+            } elseif($page == "users") {
+                // add data users
+            } else {
+                header("location:../error/not_found.php");
+            }
+        }
+    } else {
+        header("location:../error/deniedpage.php");
+    }
+} else {
+    header("location:../error/index.php?pesan=needlogin");
+}
+
 ?>
