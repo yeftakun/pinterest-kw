@@ -32,7 +32,8 @@ if(isset($_GET['user_name'])) {
     }
 } else {
     // Redirect ke halaman lain jika user_name tidak disediakan
-    header("Location: error/not_found.php");
+    // header("Location: error/not_found.php");
+    header("Location: profile.php?user_name=$_SESSION[user_name]");
     exit();
 }
 ?>
@@ -49,7 +50,8 @@ if(isset($_GET['user_name'])) {
         if(isset($_SESSION['user_name']) && $_SESSION['user_name'] !== $user_name)
  {
             ?>
-            <p><a href="#">Beranda</a> | <a href="#">Share</a></p>
+            <!-- tampilan pengguna lain -->
+            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a></p>
             <p>Informasi Pengguna:</p>
             <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
             <ul>
@@ -65,7 +67,8 @@ if(isset($_GET['user_name'])) {
             <?php
         } else {
             ?>
-            <p><a href="#">Beranda</a> | <a href="#">Edit Profil</a></p>
+            <!-- tampilan untuk pengguna itu sendiri -->
+            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="#">Edit Profil</a></p>
             <p>Informasi Saya:</p>
             <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
             <ul>
@@ -82,9 +85,10 @@ if(isset($_GET['user_name'])) {
         }
 
     } else {
+        // tampilan pengguna lain (tapi belum login)
         // Pengguna belum login, tampilkan link login
         ?>
-        <p><a href="../index.php">Beranda</a> | <a href="#">Share</a> | <a href="#">Login</a></p>
+        <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="../index.php">Login</a></p>
         <p>Informasi Pengguna:</p>
         <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
         <ul>
