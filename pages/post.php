@@ -6,6 +6,8 @@ include '../koneksi.php';
 include '../environment.php';
 // init nilai
 $token = TOKEN_BOT;
+$max_image_size = MAX_IMAGE_SIZE;
+$size_in_kb = $max_image_size / 1000;
 $errorMsg = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -34,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validasi 1: ukuran file
-    if ($_FILES['image']['size'] > 512000) {
+    if ($_FILES['image']['size'] > $max_image_size) {
         header("location:post.php?pesan=oversize");
         exit();
     } else  {
@@ -100,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <body>
         
         <?php
+        echo $max_image_size;
 if(isset($_SESSION['level_id'])) {
     if($_SESSION['level_id'] == 2) {
         // halaman posting user
@@ -136,7 +139,7 @@ if(isset($_SESSION['level_id'])) {
         <?php
         if(isset($_GET['pesan'])){
             if($_GET['pesan']=="oversize"){
-                echo "<div class='alert'>Ukuran gambar melebihi 512KB</div>";
+                echo "<div class='alert'>Ukuran gambar melebihi $size_in_kb KB</div>";
             }
         }
         ?>
@@ -152,13 +155,13 @@ if(isset($_SESSION['level_id'])) {
                 <input type="file" id="image" name="image" accept="image/*">
                 <img id="image-preview" src="#" alt="image-preview" style="display: none;"> 
                 <label for="post_title">Judul</label>
-                <input type="text" id="post_title" name="post_title" required>
+                <input type="text" id="post_title" name="post_title">
             
                 <label for="post_description">Deskripsi</label>
-                <textarea id="post_description" name="post_description" placeholder="About you" rows="5" required></textarea>
+                <textarea id="post_description" name="post_description" placeholder="Deskripsi gambar #tag1 #tag2 #tag3" rows="5"></textarea>
             
                 <label for="post_link">Link</label>
-                <input type="text" id="post_link" name="post_link" required>
+                <input type="text" id="post_link" name="post_link">
             
                 <button class="button" type="submit">Upload</button>
         </form>

@@ -19,8 +19,11 @@ include '../koneksi.php';
 // Query untuk mengambil data gambar dan informasi pengguna
 $query = "SELECT users.user_name, users.name, users.user_profile_path, posts.post_id, posts.post_img_path, posts.post_title, posts.create_in 
           FROM posts 
-          JOIN users ON posts.user_id = users.user_id";
+          JOIN users ON posts.user_id = users.user_id 
+          ORDER BY posts.create_in DESC 
+          LIMIT 20";
 $result = mysqli_query($koneksi, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,9 +47,12 @@ $result = mysqli_query($koneksi, $query);
                     <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
                 </div>
                 <div class="home-search-bar">
-                    <!-- Buat search bar -->
-                    <p><b>MK: Jadi search bar:v wkwkwk</b></p>
+                    <form action="search_result.php" method="GET">
+                        <input type="text" name="search" id="searchInput" placeholder="Search">
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
+
                 <div class="nav-to">
                     <p><a href="beranda.php">Beranda</a></p>
                 </div>
@@ -64,7 +70,7 @@ $result = mysqli_query($koneksi, $query);
                     <a href="../logout.php">LOGOUT</a>
                 </div>
             </header>
-            <p>Halaman Admin</p>
+            <p>Unggahan Terbaru</p>
 
             <?php
             if (mysqli_num_rows($result) > 0) {
@@ -105,8 +111,10 @@ $result = mysqli_query($koneksi, $query);
                     <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
                 </div>
                 <div class="home-search-bar">
-                    <!-- Buat search bar -->
-                    <p><b>MK: Jadi search bar:v wkwkwk</b></p>
+                    <form action="search_result.php" method="GET">
+                        <input type="text" name="search" id="searchInput" placeholder="Search">
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
                 <div class="nav-to">
                     <p><a href="beranda.php">Beranda</a></p>
@@ -125,7 +133,7 @@ $result = mysqli_query($koneksi, $query);
                     <a href="../logout.php">LOGOUT</a>
                 </div>
             </header>
-            <p>Beranda User</p>
+            <p>Unggahan Terbaru</p>
             <?php
             if(isset($_GET['pesan'])){
                 if($_GET['pesan']=="uploadsuccess"){
@@ -179,8 +187,10 @@ $result = mysqli_query($koneksi, $query);
                     <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
                 </div>
                 <div class="home-search-bar">
-                    <!-- Buat search bar -->
-                    <p><b>MK: Jadi search bar:v wkwkwk</b></p>
+                    <form action="search_result.php" method="GET">
+                        <input type="text" name="search" id="searchInput" placeholder="Search">
+                        <input type="submit" value="Search">
+                    </form>
                 </div>
                 <div class="nav-to">
                     <p><a href="beranda.php">Beranda</a></p>
@@ -191,7 +201,7 @@ $result = mysqli_query($koneksi, $query);
                     </p>
                 </div>
             </header>
-            <p>Halaman ketika belum login</p>
+            <p>Unggahan Terbaru</p>
 
             <?php
             if (mysqli_num_rows($result) > 0) {
