@@ -102,7 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     <body>
         
         <?php
-        echo $max_image_size;
 if(isset($_SESSION['level_id'])) {
     if($_SESSION['level_id'] == 2) {
         // halaman posting user
@@ -113,8 +112,10 @@ if(isset($_SESSION['level_id'])) {
                 <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
             </div>
             <div class="home-search-bar">
-                <!-- Buat search bar -->
-                <p><b>MK: Jadi search bar:v wkwkwk</b></p>
+                <form action="search_result.php" method="GET">
+                    <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
+                    <input type="submit" value="Search">
+                </form>
             </div>
             <div class="nav-to">
                 <p><a href="beranda.php">Beranda</a></p>

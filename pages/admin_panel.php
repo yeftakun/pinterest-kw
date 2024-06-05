@@ -44,7 +44,7 @@ if(isset($_SESSION['level_id'])) {
             </div>
             <div class="home-search-bar">
                 <form action="search_result.php" method="GET">
-                    <input type="text" name="search" id="searchInput" placeholder="Search">
+                    <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
                     <input type="submit" value="Search">
                 </form>
             </div>
@@ -67,7 +67,7 @@ if(isset($_SESSION['level_id'])) {
         </header>
         <div class="panel-search-bar">
             <form action="" method="get">
-                <input type="text" name="search" id="searchData" placeholder="Search">
+                <input type="text" name="search" id="searchData" placeholder="Cari">
             </form>
         </div>
         <?php

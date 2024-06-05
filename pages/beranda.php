@@ -48,7 +48,7 @@ $result = mysqli_query($koneksi, $query);
                 </div>
                 <div class="home-search-bar">
                     <form action="search_result.php" method="GET">
-                        <input type="text" name="search" id="searchInput" placeholder="Search">
+                        <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
                         <input type="submit" value="Search">
                     </form>
                 </div>
@@ -112,7 +112,7 @@ $result = mysqli_query($koneksi, $query);
                 </div>
                 <div class="home-search-bar">
                     <form action="search_result.php" method="GET">
-                        <input type="text" name="search" id="searchInput" placeholder="Search">
+                        <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
                         <input type="submit" value="Search">
                     </form>
                 </div>
@@ -188,7 +188,7 @@ $result = mysqli_query($koneksi, $query);
                 </div>
                 <div class="home-search-bar">
                     <form action="search_result.php" method="GET">
-                        <input type="text" name="search" id="searchInput" placeholder="Search">
+                        <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
                         <input type="submit" value="Search">
                     </form>
                 </div>

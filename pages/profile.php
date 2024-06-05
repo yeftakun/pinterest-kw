@@ -47,7 +47,7 @@ if(isset($_GET['user_name'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profil Pengguna</title>
+    <title>Profil</title>
 </head>
 <body>
     <?php
