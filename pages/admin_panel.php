@@ -128,12 +128,14 @@ if(isset($_SESSION['level_id'])) {
                     echo "<tr>";
                     echo "<th>User Name</th>";
                     echo "<th>OTP Code</th>";
+                    echo "<th>For</th>";
                     echo "<th>Control</th>";
                     echo "</tr>";
                     while($rowOtp = mysqli_fetch_assoc($resultOTP)) {
                         echo "<tr>";
                         echo "<td>".$rowOtp['user_name']."</td>";
                         echo "<td>".$rowOtp['otp_code']."</td>";
+                        echo "<td>".$rowOtp['to_use']."</td>";
                         echo "<td>";
                         echo "<a class='deleteBtn' data-id='".$rowOtp['id']."' data-page='otp'>Delete</a>";
                         echo "</td>";
@@ -179,7 +181,7 @@ if(isset($_SESSION['level_id'])) {
                         echo "<td>".$rowPost['post_img_path']."</td>";
                         echo "<td>".$rowPost['create_in']."</td>";
                         echo "<td>";
-                        echo "<a href='crud/edit_data.php?page=posts&id=".$rowPost['post_id']."'>Edit</a> | ";
+                        echo "<a href='view_img.php?post_id=".$rowPost['post_id']."'>Lihat</a> | ";
                         echo "<a class='deleteBtn' data-id='".$rowPost['post_id']."' data-page='posts'>Delete</a>";
                         echo "</td>";
                         echo "</tr>";
