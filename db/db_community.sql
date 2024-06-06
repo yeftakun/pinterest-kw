@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2024 at 08:00 PM
+-- Generation Time: Jun 06, 2024 at 01:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,7 +49,8 @@ INSERT INTO `level` (`level_id`, `level_name`) VALUES
 CREATE TABLE `otp` (
   `user_name` varchar(30) DEFAULT NULL,
   `otp_code` int(11) DEFAULT NULL,
-  `id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `to_use` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -73,9 +74,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `user_id`, `post_img_path`, `post_title`, `post_description`, `post_link`, `create_in`) VALUES
-(2, 47, 'shiroko.jpg', 'Shiroko ICON 1', '0', '0', '2024-06-03 17:56:06'),
-(3, 47, 'shiroko-1.jpg', 'Shiroko ICON 2', 'Gambar ini contoh kalau 1 file yg sama bisa di upload karena perubahan penamaan.', 'd', '2024-06-03 17:56:51'),
-(4, 48, 'bocchi care face.jpg', 'Gambar Wajah Peduli', 'd', 'd', '2024-06-03 17:59:39');
+(4, 48, 'bocchi care face.jpg', 'Gambar Wajah Peduli', 'd', 'd', '2024-06-03 17:59:39'),
+(13, 66, 'HitoriGotou.jpg', 'Gambar Bocchi pke kacamata', '#bocchi #bocchitherock', '', '2024-06-06 09:50:59');
 
 -- --------------------------------------------------------
 
@@ -137,8 +137,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`, `create_in`, `delete_in`, `tele_chat_id`) VALUES
 (8, 'admin', 'Admin', 'default.png', 'Ini adalah akun dari admin', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27', NULL),
-(47, 'yeftaasyel', 'Yefta Asyel', 'default.png', 'Akun yefta sebagai user', 2, '123', 'Aktif', '2024-06-03 17:50:17', '2024-06-03 17:53:17', '1627790263'),
-(48, 'bocchi', 'Hitori Gotou', 'default.png', 'akun kedua yefta', 2, '123', 'Aktif', '2024-06-03 17:57:45', '2024-06-03 18:00:45', '7197610153');
+(48, 'bocchi', 'Hitori Gotou', 'default.png', 'akun kedua yefta', 2, '123', 'Aktif', '2024-06-03 17:57:45', '2024-06-03 18:00:45', '7197610153'),
+(66, 'yefta', 'dada', 'default.png', 'asdad', 2, '123', 'Aktif', '2024-06-06 09:50:20', '2024-06-06 09:53:20', '1627790263');
 
 --
 -- Indexes for dumped tables
@@ -204,19 +204,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
-  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `otp`
 --
 ALTER TABLE `otp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tags`
@@ -228,7 +228,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- Constraints for dumped tables
@@ -244,6 +244,7 @@ ALTER TABLE `otp`
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
