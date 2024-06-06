@@ -98,7 +98,7 @@ if(isset($_GET['user_name'])) {
         } else {
             ?>
             <!-- tampilan untuk pengguna itu sendiri -->
-            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="#">Edit Profil</a></p>
+            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="crud/edit_profile.php">Edit Profil</a></p>
             <p>Informasi Saya:</p>
             <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
             <ul>
