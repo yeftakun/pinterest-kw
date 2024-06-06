@@ -8,24 +8,26 @@ if(isset($_SESSION['level_id'])) {
         if(isset($_GET['page'])) {
             $page = $_GET['page'];
             if($page == "level") {
-                // add data level
+                echo "<h1>Comming Soon</h1>";
                 ?>
-                <h1>Add Level page</h1>
+                <h3>Add Level page</h3>
                 <?php
             } elseif($page == "otp") {
                 // add data otp
+                echo "<h1>Comming Soon</h1>";
                 ?>
-                <h1>Add OTP page</h1>
+                <h3>Add OTP page</h3>
                 <?php
             } elseif($page == "posts") {
                 // add data posts
+                echo "<h1>Comming Soon</h1>";
                 ?>
-                <h1>Add Post page</h1>
+                <h3>Add Post page</h3>
                 <?php
             } elseif($page == "users") {
                 // add data users
                 ?>
-                <h1>Add Users page</h1>
+                <h3>Add Users page</h3>
                 <?php
             } else {
                 header("location:../error/not_found.php");
