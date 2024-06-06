@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="username" name="username" required>
 
             <label for="otp">OTP:</label>
-            <input type="text" id="otp" name="otp" required>
+            <input type="number" id="otp" name="otp" required>
 
             <button class="button" type="submit">Verifikasi</button>
         </form>
