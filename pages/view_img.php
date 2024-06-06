@@ -45,8 +45,6 @@ if (isset($_GET['post_id'])) { // jika header ada parameter post_id
         $years = floor($timeDifference / 31536000);
         $timeAgo = "$years thn";
     }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +55,37 @@ if (isset($_GET['post_id'])) { // jika header ada parameter post_id
     <title>View Image</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/alert.css">
+    <style>
+        /* CSS */
+        .modal-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Transparan */
+            z-index: 999; /* Pastikan modal muncul di atas konten */
+        }
+
+        .modal {
+            background-color: #fefefe;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
     
@@ -77,13 +106,29 @@ if ($row > 0) {
                                 <img src="../storage/posting/<?php echo $row['post_img_path']; ?>" alt="<?php echo $row['post_title']; ?>">
                             </div>
                             <div class="control">
-                                <p><a href="beranda.php">Kembali</a> | 
-                                <a href="../storage/posting/<?php echo $row['post_img_path']; ?>" download>
-                                    Download
-                                </a> | 
-                                <a href="#" id="copyButton" class="copyButton">Copy URL</a> | 
-                                <a href="#">Delete</a></p>
+                                <p>
+                                    <a href="beranda.php">Kembali</a> | 
+                                    <a href="../storage/posting/<?php echo $row['post_img_path']; ?>" download>Download</a> | 
+                                    <a href="#" id="copyButton" class="copyButton">Copy URL</a> | 
+                                    <a href="#" onclick="showConfirmationModal()">Delete</a>
+                                </p>
                             </div>
+
+                            <!-- Modal container -->
+                            <div id="modalContainer" class="modal-container" style="display: none;">
+                                <!-- Modal konfirmasi penghapusan -->
+                                <div id="confirmationModal" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close" onclick="closeConfirmationModal()">&times;</span>
+                                        <p>Apakah Anda yakin ingin menghapus gambar ini?</p>
+                                        <div class="button-container">
+                                            <button onclick="deleteImage()">Ya</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+
+
                             <div class="img-attribute">
                                 <h2><?php echo $row['post_title']; ?></h2>
                                 <p><?php echo $timeAgo; ?></p>
@@ -184,9 +229,33 @@ if ($row > 0) {
     // header("location:beranda.php?pesan=show-error");
     header("location:beranda.php");
 }
-
 ?>
 
+    <script>
+        // Fungsi untuk menampilkan modal konfirmasi
+        function showConfirmationModal() {
+            // Periksa apakah variabel row sudah didefinisikan
+            if (typeof <?php echo json_encode($row); ?> !== 'undefined') {
+                var modalContainer = document.getElementById("modalContainer");
+                modalContainer.style.display = "flex"; // Tampilkan modal container
+            }
+        }
+
+        // Menutup modal saat diklik di luar modal
+        window.onclick = function(event) {
+            var modalContainer = document.getElementById("modalContainer");
+            if (event.target == modalContainer) {
+                modalContainer.style.display = "none";
+            }
+        }
+
+
+        // Fungsi untuk menghapus gambar
+        function deleteImage() {
+            // Redirect ke delete_img.php dengan menyertakan parameter post_id
+            window.location.href = "crud/delete_img.php?post_id=<?php echo $row['post_id']; ?>";
+        }
+    </script>
     <script src="../script/alert-time.js"></script>
     <script src="../script/copy-to-clipboard.js"></script>
 
