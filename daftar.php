@@ -47,11 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $generatedCode = mt_rand(100000, 999999);
 
             // Simpan kode OTP ke database
-            $insertOTPQuery = "INSERT INTO otp (user_name, otp_code) VALUES ('$userName', '$generatedCode')";
+            $insertOTPQuery = "INSERT INTO otp (user_name, otp_code, to_use) VALUES ('$userName', '$generatedCode', 'register')";
             // eksekusi setelah data user berhasil diinput
 
             // API Telegram untuk mengirim pesan
-            $telegramAPI = "https://api.telegram.org/bot$token/sendMessage?parse_mode=markdown&chat_id=$teleChatID&text=Otp%20`$generatedCode`";
+            $telegramAPI = "https://api.telegram.org/bot$token/sendMessage?parse_mode=markdown&chat_id=$teleChatID&text=Kode%20OTP%20Regis:%20`$generatedCode`";
 
             // Kirim pesan ke Telegram
             file_get_contents($telegramAPI);
@@ -173,9 +173,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" id="password" name="password" required>
 
             <label for="tele_chat_id">ChatID Telegram:</label>
-            <input type="text" id="tele_chat_id" name="tele_chat_id" required>
-            <p><a href="https://t.me/chatIDrobot">Dapatkan ChatID</a></p>
-            <p>Sebelum submit, lakukan init (tulis apapun) terlebih dahulu <a href="https://t.me/spamtestingbot">di sini</a></p>
+            <input type="number" id="tele_chat_id" name="tele_chat_id" required>
+            <p><a href="https://t.me/chatIDrobot" target="_blank">Dapatkan ChatID</a></p>
+            <p>Sebelum submit, lakukan init (tulis apapun) terlebih dahulu <a href="https://t.me/spamtestingbot" target="_blank">di sini</a></p>
 
 
             <button class="button" type="submit">Daftar</button>

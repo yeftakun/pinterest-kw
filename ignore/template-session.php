@@ -33,6 +33,16 @@ if(isset($_SESSION['level_id'])) {
 }
 
 if(isset($_SESSION['level_id'])) {
+    if($_SESSION['user_name'] == $row['user_name']) {
+        // tampilan gambar yang diupload user sendiri
+    } else {
+        // tampilan gambar yang diupload user lain
+    }
+} else {
+    // tampilan gambar yang diupload user lain (tapi belum login)
+}
+
+if(isset($_SESSION['level_id'])) {
     if($_SESSION['level_id'] == 1) {
         // beranda admin
         if(isset($_GET['page'])) {

@@ -25,6 +25,12 @@ if(isset($_GET['user_name'])) {
         $password = $userData['password'];
         $status = $userData['status'];
         $tele_chat_id = $userData['tele_chat_id'];
+
+        // Query untuk mengambil data postingan pengguna
+        $getPostQuery = "SELECT * FROM posts WHERE user_id = '$user_id' ORDER BY create_in DESC";
+        $getPostResult = mysqli_query($koneksi, $getPostQuery);
+        $totalPost = mysqli_num_rows($getPostResult);
+
     } else {
         // Redirect ke halaman lain jika pengguna tidak ditemukan
         header("Location: error/not_found.php");
@@ -41,7 +47,7 @@ if(isset($_GET['user_name'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profil Pengguna</title>
+    <title>Profil</title>
 </head>
 <body>
     <?php
@@ -64,11 +70,35 @@ if(isset($_GET['user_name'])) {
                 <li>Status : <?php echo $status; ?></li>
                 <li>Chat ID : <?php echo $tele_chat_id; ?></li>
             </ul>
+
+            <h3>Dibuat oleh <?php echo $name ?>:</h3>
+            <?php
+            
+            // Tampilkan postingan pengguna
+            if($totalPost > 0) {
+                while($post = mysqli_fetch_assoc($getPostResult)) {
+                    ?>
+                    <div class="container">
+                        <div class="post">
+                            <a href="<?php echo 'view_img.php?post_id=' . $post['post_id']; ?>">
+                                <img src="../storage/posting/<?php echo $post['post_img_path']; ?>" alt="<?php echo $post['post_title']; ?>" max-width="300px">
+                                <p><?php echo $post['post_title']; ?></p>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                ?>
+                <p><?php echo $name ?> ini belum membuat postingan</p>
+                <?php
+            }
+            ?>
             <?php
         } else {
             ?>
             <!-- tampilan untuk pengguna itu sendiri -->
-            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="#">Edit Profil</a></p>
+            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="crud/edit_profile.php">Edit Profil</a></p>
             <p>Informasi Saya:</p>
             <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
             <ul>
@@ -81,6 +111,30 @@ if(isset($_GET['user_name'])) {
                 <li>Status : <?php echo $status; ?></li>
                 <li>Chat ID : <?php echo $tele_chat_id; ?></li>
             </ul>
+
+            <h3>Dibuat oleh Anda</h3>
+            <?php
+            
+            // Tampilkan postingan pengguna
+            if($totalPost > 0) {
+                while($post = mysqli_fetch_assoc($getPostResult)) {
+                    ?>
+                    <div class="container">
+                        <div class="post">
+                            <a href="<?php echo 'view_img.php?post_id=' . $post['post_id']; ?>">
+                                <img src="../storage/posting/<?php echo $post['post_img_path']; ?>" alt="<?php echo $post['post_title']; ?>" max-width="300px">
+                                <p><?php echo $post['post_title']; ?></p>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                ?>
+                <p>Anda belum membuat postingan</p>
+                <?php
+            }
+            ?>
         <?php
         }
 
@@ -101,6 +155,30 @@ if(isset($_GET['user_name'])) {
             <li>Status : <?php echo $status; ?></li>
             <li>Chat ID : <?php echo $tele_chat_id; ?></li>
         </ul>
+
+        <h3>Dibuat oleh <?php echo $name ?>:</h3>
+            <?php
+            
+            // Tampilkan postingan pengguna
+            if($totalPost > 0) {
+                while($post = mysqli_fetch_assoc($getPostResult)) {
+                    ?>
+                    <div class="container">
+                        <div class="post">
+                            <a href="<?php echo 'view_img.php?post_id=' . $post['post_id']; ?>">
+                                <img src="../storage/posting/<?php echo $post['post_img_path']; ?>" alt="<?php echo $post['post_title']; ?>" max-width="300px">
+                                <p><?php echo $post['post_title']; ?></p>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                }
+            } else {
+                ?>
+                <p><?php echo $name ?> ini belum membuat postingan</p>
+                <?php
+            }
+            ?>
         <?php
     }
     ?>
