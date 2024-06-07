@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Daftar</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="icon" type="image/png" href="assets/ico/HitoriGotou.ico">
+    <link rel="icon" type="image/png" href="assets/logo/logo.png">
     <link rel="stylesheet" href="styles/alert.css">
 </head>
 <body>

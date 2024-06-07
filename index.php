@@ -4,7 +4,7 @@
 	<title>Membuat Login Multi User Level Dengan PHP dan MySQLi - www.malasngoding.com</title>
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
 	<link rel="stylesheet" type="text/css" href="styles/alert.css">
-	<link rel="icon" type="image/png" href="assets/ico/HitoriGotou.ico">
+	<link rel="icon" type="image/png" href="assets/logo/logo.png">
 </head>
 <body>
  
