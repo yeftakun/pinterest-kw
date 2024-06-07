@@ -32,7 +32,7 @@ $result = mysqli_query($koneksi, $query);
 	<title>Beranda</title>
 	<link rel="stylesheet" type="text/css" href="../styles/style.css">
 	<link rel="stylesheet" type="text/css" href="../styles/alert.css">
-	<link rel="icon" type="image/png" href="../assets/ico/HitoriGotou.ico">
+	<link rel="icon" type="image/png" href="../assets/logo/logo.png">
 </head>
 <body>
     
@@ -44,7 +44,7 @@ $result = mysqli_query($koneksi, $query);
             <!-- beranda admin -->
             <header>
                 <div class="logo">
-                    <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
+                    <img src="../assets/logo/logo.png" alt="logo" width="50">
                 </div>
                 <div class="home-search-bar">
                     <form action="search_result.php" method="GET">
@@ -108,7 +108,7 @@ $result = mysqli_query($koneksi, $query);
             <!-- beranda user -->
             <header>
                 <div class="logo">
-                    <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
+                    <img src="../assets/logo/logo.png" alt="logo" width="50">
                 </div>
                 <div class="home-search-bar">
                     <form action="search_result.php" method="GET">
@@ -184,7 +184,7 @@ $result = mysqli_query($koneksi, $query);
         <!-- beranda belum login -->
         <header>
                 <div class="logo">
-                    <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
+                    <img src="../assets/logo/logo.png" alt="logo" width="50">
                 </div>
                 <div class="home-search-bar">
                     <form action="search_result.php" method="GET">

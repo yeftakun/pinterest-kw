@@ -99,6 +99,33 @@ if ($row > 0) {
             if ($_SESSION['user_name'] == $row['user_name']) {
                 // tampilan gambar yang diupload user sendiri
                 ?>
+                <header>
+                        <div class="logo">
+                            <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
+                        </div>
+                        <div class="home-search-bar">
+                            <form action="search_result.php" method="GET">
+                                <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
+                                <input type="submit" value="Search">
+                            </form>
+                        </div>
+                        <div class="nav-to">
+                            <p><a href="beranda.php">Beranda</a></p>
+                        </div>
+                        <div class="nav-to">
+                            <p><a href="post.php">Posting</a></p>
+                        </div>
+                        <div class="profile-pic">
+                            <a href="profile.php?user_name=<?php echo $_SESSION['user_name']; ?>">
+                                <?php
+                                echo '<img src="../storage/profile/' . $_SESSION['user_profile_path'] . '" alt="' . $_SESSION['user_profile_path'] . '" width="50px"';
+                            ?>
+                            </a>
+                        </div>
+                        <div class="logout">
+                            <a href="../logout.php">LOGOUT</a>
+                        </div>
+                    </header>
                     <div class="container">
                         <div class="box">
                             <!-- Tampilkan gambar dari direktori "../storage/posting/" -->
@@ -148,7 +175,33 @@ if ($row > 0) {
             } else {
                 // tampilan gambar yang diupload user lain
                 ?>
-
+                    <header>
+                        <div class="logo">
+                            <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
+                        </div>
+                        <div class="home-search-bar">
+                            <form action="search_result.php" method="GET">
+                                <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
+                                <input type="submit" value="Search">
+                            </form>
+                        </div>
+                        <div class="nav-to">
+                            <p><a href="beranda.php">Beranda</a></p>
+                        </div>
+                        <div class="nav-to">
+                            <p><a href="post.php">Posting</a></p>
+                        </div>
+                        <div class="profile-pic">
+                            <a href="profile.php?user_name=<?php echo $_SESSION['user_name']; ?>">
+                                <?php
+                                echo '<img src="../storage/profile/' . $_SESSION['user_profile_path'] . '" alt="' . $_SESSION['user_profile_path'] . '" width="50px"';
+                            ?>
+                            </a>
+                        </div>
+                        <div class="logout">
+                            <a href="../logout.php">LOGOUT</a>
+                        </div>
+                    </header>
                     <div class="container">
                         <div class="box">
                             <!-- Tampilkan gambar dari direktori "../storage/posting/" -->
@@ -184,6 +237,25 @@ if ($row > 0) {
             // tampilan jika pengguna belum login
             echo '<h1>Ini gambar yang diupload oleh user lain, tapi anda belum login</h1>';
             ?>
+            <header>
+                <div class="logo">
+                    <img src="../assets/ico/HitoriGotou.ico" alt="logo" width="50">
+                </div>
+                <div class="home-search-bar">
+                    <form action="search_result.php" method="GET">
+                        <input type="text" name="search" id="searchInput" placeholder="Judul / #tag / username">
+                        <input type="submit" value="Search">
+                    </form>
+                </div>
+                <div class="nav-to">
+                    <p><a href="beranda.php">Beranda</a></p>
+                </div>
+                <div class="nav-to">
+                    <p>
+                        <a href="../index.php">LOGIN</a>
+                    </p>
+                </div>
+            </header>
             <div class="container">
                 <div class="box">
                     <!-- Tampilkan gambar dari direktori "../storage/posting/" -->

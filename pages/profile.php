@@ -57,7 +57,7 @@ if(isset($_GET['user_name'])) {
  {
             ?>
             <!-- tampilan pengguna lain -->
-            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a></p>
+            <p><a href="beranda.php">Beranda</a> | <a href="#" id="copyButton">Share</a></p>
             <p>Informasi Pengguna:</p>
             <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
             <ul>
@@ -98,7 +98,7 @@ if(isset($_GET['user_name'])) {
         } else {
             ?>
             <!-- tampilan untuk pengguna itu sendiri -->
-            <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="crud/edit_profile.php">Edit Profil</a></p>
+            <p><a href="beranda.php">Beranda</a> | <a href="#" id="copyButton">Share</a> | <a href="crud/edit_profile.php">Edit Profil</a></p>
             <p>Informasi Saya:</p>
             <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
             <ul>
@@ -142,7 +142,7 @@ if(isset($_GET['user_name'])) {
         // tampilan pengguna lain (tapi belum login)
         // Pengguna belum login, tampilkan link login
         ?>
-        <p><a href="beranda.php">Beranda</a> | <a href="#">Share</a> | <a href="../index.php">Login</a></p>
+        <p><a href="beranda.php">Beranda</a> | <a href="#" id="copyButton">Share</a> | <a href="../index.php">Login</a></p>
         <p>Informasi Pengguna:</p>
         <img src="../storage/profile/<?php echo $user_profile_path; ?>" alt="<?php echo $user_profile_path; ?>" max-width="300px">
         <ul>
@@ -182,5 +182,8 @@ if(isset($_GET['user_name'])) {
         <?php
     }
     ?>
+
+    <script src="../script/alert-time.js"></script>
+    <script src="../script/copy-to-clipboard.js"></script>
 </body>
 </html>
