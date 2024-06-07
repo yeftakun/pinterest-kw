@@ -13,10 +13,7 @@ Perubahan terbaru pada proyek:
 [Icon](https://id.pinterest.com/pin/408912841182046181/)
 
 ### Catatan:
-- terdapat file `template_environment.php`. Copy filenya dan ganti nama menjadi `environment.php`, isi bot token di dalam file itu.
-- di file `daftar.php` input file gambar memang sengaja di *comment*. Jadikan saja file ini referensi untuk **update profile**
-- di `storage/profile` itu ada `default.png` jangan dihapus ^^
-- Referensi tata letak gambar di beranda [referensi 1](https://yeftakun.github.io/TIK2032-Project/page/blog.html), referensi 2.
+- Jangan menaruh file penting di `storage/posting/` karena file di direktori ini akan terhapus jika namanya tidak terdapat di kolom `posts.post_img_path`.
 
 ### Database:
 
