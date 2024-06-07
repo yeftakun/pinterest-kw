@@ -4,9 +4,7 @@
 
 Perubahan terbaru pada proyek:
 
-- Menambahkan verifikasi OTP via API telegram modal Chat ID user
-- Update database terbaru: Integrity constraint `users.user_name` (parent) & `otp.user_name` (child).
-- Saat register, di database insert data users dulu baru insert data otp.
+- Tinggal implementasi frontend
 
 ### CREDIT
 
