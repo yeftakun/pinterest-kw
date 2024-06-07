@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2024 at 01:48 PM
+-- Generation Time: Jun 07, 2024 at 04:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,8 +74,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `user_id`, `post_img_path`, `post_title`, `post_description`, `post_link`, `create_in`) VALUES
-(4, 48, 'bocchi care face.jpg', 'Gambar Wajah Peduli', 'd', 'd', '2024-06-03 17:59:39'),
-(13, 66, 'HitoriGotou.jpg', 'Gambar Bocchi pke kacamata', '#bocchi #bocchitherock', '', '2024-06-06 09:50:59');
+(4, 48, 'bocchi care face.jpg', 'Gambar Wajah Peduli', 'd', 'd', '2024-06-03 17:59:39');
 
 -- --------------------------------------------------------
 
@@ -137,8 +136,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_name`, `name`, `user_profile_path`, `user_bio`, `level_id`, `password`, `status`, `create_in`, `delete_in`, `tele_chat_id`) VALUES
 (8, 'admin', 'Admin', 'default.png', 'Ini adalah akun dari admin', 1, '123', 'Aktif', '2024-06-01 07:20:27', '2024-06-01 07:50:27', NULL),
-(48, 'bocchi', 'Hitori Gotou', 'default.png', 'akun kedua yefta', 2, '123', 'Aktif', '2024-06-03 17:57:45', '2024-06-03 18:00:45', '7197610153'),
-(66, 'yefta', 'dada', 'default.png', 'asdad', 2, '123', 'Aktif', '2024-06-06 09:50:20', '2024-06-06 09:53:20', '1627790263');
+(48, 'bocchi', 'Hitori Gotou', 'default.png', 'akun kedua yefta', 2, '123', 'Aktif', '2024-06-03 17:57:45', '2024-06-03 18:00:45', '7197610153');
 
 --
 -- Indexes for dumped tables
@@ -210,7 +208,7 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `otp`
 --
 ALTER TABLE `otp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -228,7 +226,7 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- Constraints for dumped tables
