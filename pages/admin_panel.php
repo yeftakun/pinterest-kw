@@ -84,11 +84,29 @@ if(isset($_SESSION['level_id'])) {
                 </div>";
             }
         }
+        if(isset($_GET['pesan'])) {
+            if($_GET['pesan'] == "successupdateusers") {
+                echo "<div class='done'>
+                    Data user berhasil diubah.
+                </div>";
+            }
+        }
+        if(isset($_GET['pesan'])) {
+            if($_GET['pesan'] == "trash_file_deleted") {
+                echo "<div class='done'>
+                    File tidak berguna sudah dihapus.
+                </div>";
+            }
+        }
         ?>
+
+        <form action="crud/delete_trash_file.php" method="post">
+            <input type="submit" name="clear_trash" value="Clear Trash">
+        </form>
 
         <div class="container">
             <h2>Level Table</h2>
-            <a href="crud/add_data.php?page=level">Add Data</a>
+            <!-- <a href="crud/add_data.php?page=level">Add Data</a> -->
             <!-- Tabel Level disini -->
             <table id="levelTable">
                 <?php
@@ -105,7 +123,7 @@ if(isset($_SESSION['level_id'])) {
                         echo "<td>".$rowLevel['level_id']."</td>";
                         echo "<td>".$rowLevel['level_name']."</td>";
                         echo "<td>";
-                        echo "<a href='crud/edit_data.php?page=level&id=".$rowLevel['level_id']."'>Edit</a> | ";
+                        // echo "<a href='crud/edit_data.php?page=level&id=".$rowLevel['level_id']."'>Edit</a> | ";
                         // Tambahkan tombol delete dengan atribut data-id
                         echo "<a class='deleteBtn' data-id='".$rowLevel['level_id']."' data-page='level'>Delete</a>";
                         echo "</td>";
@@ -156,7 +174,7 @@ if(isset($_SESSION['level_id'])) {
 
         <div class="container">
             <h2>Posts Table</h2>
-            <a href="crud/add_data.php?page=posts">Add Data</a>
+            <!-- <a href="crud/add_data.php?page=posts">Add Data</a> -->
             <table id="postsTable">
                 <!-- Tabel Posts disini -->
                 <?php
@@ -363,7 +381,7 @@ if(isset($_SESSION['level_id'])) {
                 searchData(this.value);
             });
         </script>
-
+        <script src="../script/alert-time.js"></script>
         </body>
         </html>
 
