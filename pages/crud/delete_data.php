@@ -39,15 +39,16 @@ if(isset($_GET['page']) && isset($_GET['id'])) {
     // Eksekusi query DELETE
     if(mysqli_query($koneksi, $query)) {
         // Jika penghapusan berhasil, beri respon dengan status sukses
-        header("location:admin_panel.php?pesan=success_delete");
+        http_response_code(200);
+        echo "Data berhasil dihapus";
     } else {
         // Jika terjadi kesalahan saat menghapus data, beri respon dengan status error
-        header("location:admin_panel.php?pesan=failed_delete");
+        http_response_code(500);
+        echo "Gagal menghapus data: " . mysqli_error($koneksi);
     }
 } else {
     // Jika parameter page dan id tidak ditemukan, beri respon dengan status error
     http_response_code(400);
     echo "Parameter page dan id diperlukan";
-    header("location:error/not_found.php");
 }
 ?>
